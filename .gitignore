@@ -3,7 +3,16 @@ web/node_modules/
 web/dist/
 data/
 .agents/
-design/shots/
+/.claude/
+/AGENTS.md
+/CLAUDE.md
+/design/
+/notes/iterations.md
+/docs/product-quality-audit.md
+/deploy/
+/scripts/ask-claude.sh
+/scripts/deploy-gcp.sh
+/scripts/screenshot.mjs
 .env
 .env.*
 !.env.example
