@@ -8,9 +8,9 @@ const shortName = (company: string) => company.replace(/ \(fictional\)/, "");
 export function ScenarioStart({ scenarios, current, busy, onPick, onStart }: { scenarios: DemoScenario[]; current: string; busy: boolean; onPick: (id: string) => void; onStart: () => void }) {
   const selected = scenarios.find((demo) => demo.id === current) ?? scenarios[0];
   return (
-    <section aria-labelledby="choose-demo">
+    <section aria-labelledby="choose-demo" className="flex min-h-full flex-col justify-center">
       <div className="concept-picker-content mx-auto flex max-w-6xl flex-col gap-6 py-2 sm:py-6">
-        <div>
+        <div className="text-center">
           <h2 id="choose-demo" className="text-[22px] font-semibold tracking-[-0.01em]">Choose a demo</h2>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
             Choose a fictional company to follow its email story. Open the admin dashboard to see what ccPlannie records and where people make decisions.
@@ -49,7 +49,7 @@ export function ScenarioStart({ scenarios, current, busy, onPick, onStart }: { s
             );
           })}
         </fieldset>
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <Button className="concept-demo-action" onClick={onStart} disabled={busy}>Start demo #{selected.number}<ArrowRightIcon aria-hidden="true" strokeWidth={1.7} /></Button>
         </div>
       </div>

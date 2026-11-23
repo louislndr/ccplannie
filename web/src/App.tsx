@@ -141,7 +141,7 @@ function DemoApp({ path }: { path: string }) {
                 </Button>
               ) : null}
               {!activeScenario ? <Button variant="outline" nativeButton={false} render={<a href="/how-it-works" onClick={linkClick("/how-it-works", { returnTo: "/" })} />}>
-                <span className="lg:hidden">How it works</span><span className="hidden lg:inline">How it connects to Planned</span>
+                About ccPlannie
               </Button> : null}
               {activeScenario ? <Button variant="outline" onClick={() => navigate(COMPANY_PATH, { returnTo: DEMO_PATH })}>Company</Button> : null}
               <Button variant="outline" nativeButton={false} render={<a href={adminPath} target="_blank" rel="noreferrer" />}>

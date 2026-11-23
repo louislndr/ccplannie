@@ -30,6 +30,14 @@ const STEPS = [
   },
 ];
 
+const FEATURES: [string, string][] = [
+  ["Email intake", "CC or forward ccPlannie. It opens a request, asks for anything missing, and keeps replies linked to it."],
+  ["Who can decide", "Company roles decide who can start a request, change the plan, approve spending and book. A suggestion doesn’t change the plan on its own."],
+  ["Finance approvals", "Finance approves the exact venue, date, headcount and price in a private email, within their limit, with escalation when it’s above."],
+  ["Changes and their cost", "Stale quotes, contract fees and amounts over budget are flagged in the thread. The booking stays as it is until the venue confirms a change."],
+  ["Company console", "The event manager sees every request, what’s blocking it, the plan next to what’s approved and booked, and the full history. Admins manage people, roles and rules."],
+];
+
 export function HowItWorks() {
   const { search } = useLocation();
   const fromConsole = new URLSearchParams(search).get("from") === "console";
@@ -39,14 +47,32 @@ export function HowItWorks() {
       <div className="h-full overflow-y-auto">
         <div className="mx-auto max-w-3xl px-[var(--concept-gutter)] pb-20 pt-6 sm:pt-10">
           <a href={backTo} onClick={backLinkClick(backTo)} className="inline-flex items-center gap-1.5 text-sm underline-offset-2 hover:underline"><ArrowLeftIcon aria-hidden="true" className="size-4" strokeWidth={1.6} />{fromConsole ? "Back to Planned exchanges" : "Back to the demo"}</a>
-          <h1 className="sr-only">Planned integration</h1>
-          <p className="mt-6 text-[17px] leading-relaxed text-foreground">
-            The demo starts when someone copies ccPlannie on an event email. ccPlannie coordinates the request and checks who can make decisions and approve spending. Planned handles venues, contracts and bookings in the proposed workflow.
+          <h1 className="mt-6 text-[26px] font-semibold tracking-[-0.02em]">About ccPlannie</h1>
+          <p className="mt-2 text-[17px] leading-relaxed text-foreground">
+            An email assistant for event requests, built as an extension concept for Planned. Employees CC it on an event email and keep working from their inbox. The event manager gets a structured request and a console to carry it through to a confirmed booking.
           </p>
-
-          <Flow />
+          <p className="mt-2 text-sm text-muted-foreground">Independent prototype with fictional data. Not made by or connected to Planned.</p>
 
           <div className="mt-10 flex flex-col gap-9">
+            <Section title="Where the idea came from">
+              <p>Planned’s own website points at it. In a customer story, it describes a previous platform where <q>smaller events were falling outside the system entirely, leaving procurement with major blind spots.</q> Its adoption playbook is about reaching people who only plan now and then: <q>Find the event spenders you didn't know you had.</q></p>
+              <p className="mt-3">Those occasional planners usually start in email. Someone forwards a request, someone suggests more people, someone replies “looks good”. By the time an event manager reads the thread, it’s hard to tell what was decided, what finance approved, and what the venue confirmed.</p>
+              <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                <a href="https://planned.com/customers/consumer-goods" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[var(--concept-blue)] underline-offset-2 hover:underline">Customer story<SquareArrowOutUpRightIcon aria-hidden="true" className="size-3.5" strokeWidth={1.7} /></a>
+                <a href="https://planned.com/adoption-playbook" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[var(--concept-blue)] underline-offset-2 hover:underline">Adoption playbook<SquareArrowOutUpRightIcon aria-hidden="true" className="size-3.5" strokeWidth={1.7} /></a>
+              </p>
+            </Section>
+
+            <Section title="What ccPlannie does">
+              <ul className="flex flex-col gap-2.5 text-[15px]">
+                {FEATURES.map(([title, text]) => <li key={title} className="ml-5 list-disc pl-1"><span className="font-medium">{title}.</span> {text}</li>)}
+              </ul>
+            </Section>
+
+            <Section title="How it connects to Planned">
+              <p>ccPlannie coordinates the request and checks who can make decisions and approve spending. Planned handles venues, contracts and bookings.</p>
+              <Flow />
+            </Section>
             <Section title="From request to booking">
               <ol className="flex flex-col gap-4">
                 {STEPS.map(({ title, description }) => (
@@ -65,7 +91,7 @@ export function HowItWorks() {
 
             <Section title="What the demo shows">
               <p>You can try ccPlannie’s email workflow, permission checks, approvals and activity log. Venue options, quotes and booking confirmations are sample data. The demo has no live connection to Planned.</p>
-              <p className="mt-3">A live integration would need the company’s Planned administrator to authorize access and Planned to confirm which actions its connector supports. Planned advertises venue search, event status and spend through its MCP connector.</p>
+              <p className="mt-3">A live integration would need the company’s Planned administrator to authorize access and Planned to confirm which actions its connector supports. Planned’s integrations page lists an MCP connector to “plan and manage events from the AI assistant your team already uses”.</p>
               <p className="mt-3"><a href="https://planned.com/products/integrations" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[var(--concept-blue)] underline-offset-2 hover:underline">Planned's integrations<SquareArrowOutUpRightIcon aria-hidden="true" className="size-3.5" strokeWidth={1.7} /></a></p>
               {!fromConsole ? <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
                 <a href="/" onClick={linkClick("/")} className="text-[var(--concept-blue)] underline-offset-2 hover:underline">Run a demo</a>
