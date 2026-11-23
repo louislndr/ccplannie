@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Apple-Mail-like tokens, exposed under the shadcn names the 21st primitives use. */
+:root {
+  color-scheme: only light;
+  --radius: 0.625rem;
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1f;
+  --primary: #007aff;
+  --primary-foreground: #ffffff;
+  --secondary: #f2f2f7;
+  --secondary-foreground: #1d1d1f;
+  --muted: #f5f5f7;
+  --muted-foreground: #6e6e73;
+  --accent: #e8f1fe;
+  --accent-foreground: #0a3d91;
+  --destructive: #d70015;
+  --border: #e3e3e6;
+  --input: #d2d2d7;
+  --ring: #0a84ff;
+  --sidebar: #e9e8ec;
+  --ok: #248a3d;
+  --warn: #b25000;
+  --pending: #7d3cc7;
+  --selected: #0063e1;
+}
+
+@theme inline {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-pending: var(--pending);
+  --color-selected: var(--selected);
+  --color-m-desktop: var(--m-desktop);
+  --color-m-window: var(--m-window);
+  --color-m-sidebar: var(--m-sidebar);
+  --color-m-banner: var(--m-banner);
+  --color-m-label: var(--m-label);
+  --color-m-label2: var(--m-label2);
+  --color-m-label3: var(--m-label3);
+  --color-m-sep: var(--m-sep);
+  --color-m-accent: var(--m-accent);
+  --color-m-select: var(--m-select);
+  --color-m-sidesel: var(--m-sidesel);
+  --color-m-icon: var(--m-icon);
+  --color-m-fill: var(--m-fill);
+  --color-m-button: var(--m-button);
+  --color-m-green: var(--m-green);
+  --color-m-orange: var(--m-orange);
+  --color-m-purple: var(--m-purple);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+#root { position: fixed; inset: 0; height: 100dvh; overflow: clip; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+* { border-color: var(--border); }
+input[type="checkbox"] { accent-color: var(--m-accent); }
+button { cursor: default; }
+
+/* macOS / iOS Mail system colors (Sequoia). Light palette. */
+:root {
+  --m-desktop: #d9d9de;
+  --m-window: #ffffff;
+  --m-sidebar: #e9e8ec;
+  --m-banner: #f5f5f7;
+  --m-label: #1d1d1f;
+  --m-label2: #737378;
+  --m-label3: #a5a5aa;
+  --m-sep: #e3e3e6;
+  --m-accent: #007aff;
+  --m-select: #0063e1;
+  --m-sidesel: rgba(0, 0, 0, 0.09);
+  --m-icon: #6e6e73;
+  --m-fill: rgba(0, 0, 0, 0.055);
+  --m-avatar1: #a7a7ad;
+  --m-avatar2: #86868b;
+  --m-button: #ffffff;
+  --m-frame: rgba(0, 0, 0, 0.2);
+  --m-green: #28a745;
+  --m-orange: #ff9500;
+  --m-purple: #af52de;
+}

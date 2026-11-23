@@ -1,0 +1,91 @@
+/* The workspace uses the demo's shared brand tokens and a quieter navigation surface. */
+.console {
+  color-scheme: light;
+  --concept-button-height: 2.25rem;
+  --concept-button-padding: .875rem;
+  --concept-button-gap: .375rem;
+  --concept-button-font: .8125rem;
+  --console-sidebar: color-mix(in srgb, var(--concept-paper) 88%, var(--concept-sky));
+  --console-row-hover: var(--concept-background-tint);
+  --console-selected: color-mix(in srgb, var(--concept-sky) 60%, var(--card));
+  --console-attn: #b25000;
+  --console-ok: #248a3d;
+  --console-block: #c4281c;
+  --console-info: var(--concept-blue);
+  --console-field: var(--card);
+  --input: color-mix(in srgb, var(--border) 53%, var(--concept-ink));
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: var(--concept-shadow);
+}
+.console-nav { background: var(--console-sidebar); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) :is(.console, .console + .concept-controls) {
+    color-scheme: dark;
+    --background: #1e1e1e;
+    --foreground: #f5f5f7;
+    --card: #262628;
+    --card-foreground: #f5f5f7;
+    --popover: #2c2c2e;
+    --popover-foreground: #f5f5f7;
+    --primary: #9bd6d3;
+    --primary-foreground: #142a2c;
+    --concept-deep: #bdecec;
+    --secondary: #2c2c2e;
+    --secondary-foreground: #f5f5f7;
+    --muted: #2a2a2c;
+    --muted-foreground: #a1a1a6;
+    --accent: #2c4143;
+    --accent-foreground: #dbf1f0;
+    --destructive: #ff6961;
+    --border: #3a3a3c;
+    --input: #6f7474;
+    --ring: #9bd6d3;
+    --ok: #32d74b;
+    --warn: #ffb340;
+    --pending: #bf5af2;
+    --m-sep: #3a3a3c;
+    --m-label: #f5f5f7;
+    --m-label2: #a1a1a6;
+    --m-label3: #6e6e73;
+    --m-banner: #262628;
+    --m-fill: rgba(255, 255, 255, 0.08);
+    --m-button: #3a3a3c;
+    --m-accent: #0a84ff;
+    --m-icon: #a1a1a6;
+    --console-sidebar: #19191a;
+    --console-row-hover: rgba(255, 255, 255, 0.04);
+    --console-selected: #294447;
+    --console-attn: #ffb340;
+    --console-ok: #32d74b;
+    --console-block: #ff6961;
+    --console-info: #64a8ff;
+    --console-field: #1c1c1e;
+    --planned-out: #7db8dc;
+    --planned-in: #6fcf9f;
+  }
+}
+.console :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 4px; }
+.console input, .console select, .console textarea { background: var(--console-field); }
+.console select { appearance: auto; }
+.console .tabular { font-variant-numeric: tabular-nums; }
+
+/* Checkboxes in the console's own colors: hairline box, dark-teal fill with a white tick (light and dark). */
+.console input[type="checkbox"] {
+  appearance: none; flex: none; width: 16px; height: 16px; margin: 0; vertical-align: middle; cursor: pointer;
+  border: 1px solid var(--input); border-radius: 4px; background: var(--console-field);
+  display: inline-grid; place-content: center; transition: background-color .12s, border-color .12s;
+}
+.console input[type="checkbox"]::after {
+  content: ""; width: 9px; height: 5px; margin-top: -2px; border: solid var(--primary-foreground); border-width: 0 0 1.75px 1.75px;
+  transform: rotate(-45deg) scale(0); transition: transform .12s;
+}
+.console input[type="checkbox"]:checked { background: var(--primary); border-color: var(--primary); }
+.console input[type="checkbox"]:checked::after { transform: rotate(-45deg) scale(1); }
+.console input[type="checkbox"]:hover:not(:checked):not(:disabled) { border-color: var(--primary); }
+.console input[type="checkbox"]:disabled { opacity: .45; cursor: default; }
+
+/* Toasts rise in gently from the bottom of the content area. */
+@keyframes console-toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.console-toast > div { animation: console-toast-in .18s cubic-bezier(.2,.8,.2,1); }
+@media (prefers-reduced-motion: reduce) { .console-toast > div { animation: none; } }

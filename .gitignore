@@ -1,0 +1,12 @@
+node_modules/
+web/node_modules/
+web/dist/
+data/
+.agents/
+design/shots/
+.env
+.env.*
+!.env.example
+.vercel/
+.DS_Store
+._*

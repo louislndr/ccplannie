@@ -1,0 +1,304 @@
+@font-face {
+  font-family: "Concept Geist";
+  src: url("./assets/geist/Geist-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Concept Geist Mono";
+  src: url("./assets/geist/GeistMono-Variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+.planned-concept {
+  --concept-font: "Concept Geist", system-ui, sans-serif;
+  --concept-text-tracking: -.005em;
+  --concept-paper: #fcfbf4;
+  --concept-beige: #f1ede3;
+  --concept-sky: #c2e0e1;
+  --concept-mint: #a8d8cd;
+  --concept-seafoam: #4f9897;
+  --concept-blue: #39759a;
+  /* Traffic with Planned, the same on the story site and in the console: blue leaves for Planned, green comes back. */
+  --planned-out: #39759a;
+  --planned-in: #2e7d5b;
+  --concept-gold: #ffdba6;
+  --concept-ink: #21333a;
+  --concept-deep: #294b4f;
+  --concept-background-tint: rgb(33 51 58 / .045);
+  --concept-cc-blue: #355e70;
+  --concept-grain: url("./assets/planned-grain.png");
+  --concept-muted: #51605f;
+  --concept-seam: #e1e1dc;
+  --concept-content-width: 90rem;
+  --concept-gutter: clamp(1rem, 3vw, 1.5rem);
+  --concept-shell-gap: clamp(.75rem, 1.2vw, 1rem);
+  --concept-panel-radius: 1.25rem;
+  --concept-card-radius: 1.5rem;
+  --concept-shadow: 0 14px 38px -23px rgb(33 51 58 / .32);
+  --concept-button-height: 3rem;
+  --concept-button-padding: 1.375rem;
+  --concept-button-gap: .625rem;
+  --concept-button-font: .9375rem;
+  --concept-button-radius: 999px;
+  --concept-demo-action-width: 9.5rem;
+  --background: var(--concept-paper);
+  --foreground: var(--concept-ink);
+  --card: #fff;
+  --card-foreground: var(--concept-ink);
+  --primary: var(--concept-ink);
+  --primary-foreground: #fff;
+  --secondary: color-mix(in srgb, var(--concept-ink) 7%, var(--concept-paper));
+  --secondary-foreground: var(--concept-ink);
+  --muted: var(--concept-beige);
+  --muted-foreground: var(--concept-muted);
+  --accent: color-mix(in srgb, var(--concept-ink) 11%, var(--concept-paper));
+  --accent-foreground: var(--concept-ink);
+  --border: var(--concept-seam);
+  --ring: var(--concept-blue);
+  position: relative;
+  isolation: isolate;
+  background-image:
+    linear-gradient(var(--concept-background-tint), var(--concept-background-tint)),
+    radial-gradient(ellipse 75% 66% at 0% 0%, color-mix(in srgb, var(--concept-paper) 85%, transparent), transparent 78%),
+    radial-gradient(ellipse at 96% 5%, var(--concept-sky), transparent 55%),
+    radial-gradient(ellipse at 100% 102%, var(--concept-gold), transparent 53%),
+    radial-gradient(ellipse at 0% 82%, var(--concept-seafoam), transparent 52%),
+    linear-gradient(140deg, var(--concept-mint) 8%, color-mix(in srgb, var(--concept-blue) 65%, var(--concept-sky)) 70%, var(--concept-sky));
+  background-repeat: no-repeat;
+  font-family: var(--concept-font);
+}
+
+.planned-concept::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: var(--concept-grain) repeat 0 0 / 192px 192px;
+  mix-blend-mode: soft-light;
+  opacity: .25;
+}
+
+.planned-concept .concept-label {
+  font-size: .875rem;
+  line-height: 1.2;
+}
+
+.planned-concept .concept-wordmark {
+  width: auto;
+  height: .9375rem;
+}
+
+@media (min-width: 48rem) {
+  .planned-concept .concept-wordmark {
+    height: 1.125rem;
+  }
+}
+
+.planned-concept .concept-heading {
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -.045em;
+}
+
+.planned-concept .concept-display {
+  font-family: var(--concept-font);
+  font-size: clamp(2rem, 3.6vw, 2.875rem);
+  letter-spacing: -.035em;
+}
+
+.planned-concept .concept-cc {
+  color: var(--concept-cc-blue);
+}
+
+.planned-concept .plannie-mark {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  isolation: isolate;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 28% 24%, #aec9db, transparent 55%),
+    linear-gradient(169deg, #476b89 6%, #7699b3 43%, #c5dbe5 80%, #eef6f1 98%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .32), inset 0 -.04em .1em rgb(255 255 255 / .45), 0 .08em .22em rgb(33 51 58 / .17);
+  font-size: clamp(1.875rem, 3.25vw, 2.625rem);
+}
+
+.planned-concept .plannie-mark::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: var(--concept-grain) center / 2em;
+  mix-blend-mode: overlay;
+  opacity: .17;
+}
+
+.planned-concept .plannie-mark::after {
+  position: absolute;
+  top: .36em;
+  left: .31em;
+  width: .14em;
+  height: .27em;
+  border-radius: 999px;
+  background: #eaf5fd;
+  box-shadow: .24em 0 #eaf5fd;
+  filter: blur(.016em);
+  content: "";
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .planned-concept .plannie-mark::after {
+    transform: translate(var(--plannie-eye-x, 0), var(--plannie-eye-y, 0));
+    transition: transform 110ms ease-out;
+  }
+}
+
+.planned-concept .concept-mono {
+  font-family: "Concept Geist Mono", ui-monospace, monospace;
+}
+
+.planned-concept .concept-controls {
+  border-radius: var(--concept-panel-radius);
+  box-shadow: var(--concept-shadow);
+}
+
+.planned-concept .concept-shell {
+  gap: var(--concept-shell-gap);
+  padding-block: var(--concept-shell-gap);
+}
+
+.planned-concept .concept-header-label {
+  color: var(--foreground);
+  font-family: var(--concept-font);
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+
+@media (min-width: 40rem) {
+  .planned-concept .concept-header-label {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 1.5rem;
+    border-inline-start: 2px solid color-mix(in srgb, var(--concept-deep) 70%, transparent);
+    padding-inline-start: var(--concept-shell-gap);
+    font-size: 1.125rem;
+  }
+}
+
+.planned-concept .concept-flow .plannie-mark {
+  font-size: 1.75rem;
+}
+
+.planned-concept [data-slot="card"] {
+  border: 0;
+  border-radius: var(--concept-card-radius);
+  box-shadow: var(--concept-shadow);
+}
+
+.planned-concept [data-slot="button"] {
+  min-height: var(--concept-button-height);
+  gap: var(--concept-button-gap);
+  padding: 0 var(--concept-button-padding);
+  border: 0;
+  border-radius: var(--concept-button-radius);
+  font-family: var(--concept-font);
+  font-size: var(--concept-button-font);
+  line-height: 1.2;
+  letter-spacing: var(--concept-text-tracking);
+  cursor: pointer;
+}
+
+.planned-concept [data-slot="button"][data-variant="default"]:hover {
+  background: var(--concept-deep);
+}
+
+.planned-concept [data-slot="button"][data-variant="outline"] {
+  border-color: transparent;
+  background: var(--secondary);
+  box-shadow: none;
+}
+
+.planned-concept [data-slot="button"][data-variant="outline"]:hover {
+  background: var(--accent);
+}
+
+.concept-demo [data-slot="button"] {
+  min-width: var(--concept-button-height);
+  border: 1px solid transparent;
+}
+
+.concept-demo [data-slot="button"].concept-demo-action {
+  min-width: var(--concept-demo-action-width);
+}
+
+.concept-demo [data-slot="button"][data-variant="outline"] {
+  border-color: color-mix(in srgb, var(--concept-ink) 17%, transparent);
+  background: var(--card);
+}
+
+.concept-demo [data-slot="button"][data-variant="outline"]:hover {
+  background: var(--muted);
+}
+
+.concept-demo [data-slot="button"].concept-icon-button {
+  width: var(--concept-button-height);
+  padding-inline: 0;
+}
+
+.planned-concept .company-page {
+  --company-teal: #27695c;
+  --muted: #edf4f2;
+  --muted-foreground: #374f54;
+  --secondary: #deece8;
+  --accent: #cfe4de;
+  --border: #d7e5e1;
+  --concept-shadow: 0 15px 34px -20px rgb(24 54 59 / .5);
+}
+
+.planned-concept .company-header {
+  border-radius: var(--concept-card-radius);
+  background: var(--concept-paper);
+  box-shadow: var(--concept-shadow);
+}
+
+.planned-concept .company-page [data-slot="card"] {
+  box-shadow: 0 0 0 1px var(--border), var(--concept-shadow);
+}
+
+@media (max-width: 639px) {
+  .planned-concept.concept-demo,
+  .planned-concept .concept-demo {
+    --concept-button-padding: .625rem;
+    --concept-button-height: 2.5rem;
+    --concept-button-gap: .375rem;
+    --concept-button-font: .875rem;
+    --concept-demo-action-width: var(--concept-button-height);
+  }
+}
+
+
+.concept-story[data-picker] {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+@media (min-width: 48rem) and (max-height: 42rem) {
+  .concept-picker-content {
+    gap: 0.875rem;
+    padding-block: 0.5rem;
+  }
+
+  .concept-picker-card {
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+}
