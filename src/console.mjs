@@ -5,7 +5,7 @@ import { COMPANY, PLANNIE, POLICY, CONFIG, PEOPLE, ORG, can, person, displayName
 import { PERMISSIONS, capsOfRole } from "./org.mjs";
 import { SUPPLIERS } from "./supplier-sim.mjs";
 import { interpreterMode } from "./interpret.mjs";
-import { MODEL } from "./llm.mjs";
+import { GEMINI_DEFAULT, MODEL } from "./llm.mjs";
 import { plannedAdapter } from "./planned.mjs";
 import { gmailConfigured, GMAIL_STATUS } from "./gmail.mjs";
 import { agentmailConfigured, AGENTMAIL_STATUS } from "./agentmail.mjs";
@@ -251,12 +251,12 @@ export function connections(store, { demo = false, demoPolicyFile = null } = {})
     : directorySource?.action === "org.csv_imported"
     ? { state: "saved", label: "Imported from CSV", fileName: directorySource.details?.sourceFile, detail: "This CSV supplied the people and roles in the directory. You can export the current directory from the People page." }
     : demo
-    ? { state: "sample", label: "Demo directory export", ...directoryExport, detail: "Download a CSV of the demo’s current directory, including people, roles, and reporting lines." }
+    ? { state: "saved", label: "Directory export", ...directoryExport, detail: "Download a CSV of the current directory, including people, roles, and reporting lines." }
     : { state: "saved", label: "Directory export", ...directoryExport, detail: "Download a CSV of your current directory. You can import a directory file from the People page." };
   const rules = rulesSource?.action === "policy.imported"
     ? { state: "saved", label: "Uploaded policy", fileName: rulesSource.details?.sourceFile, detail: "ccPlannie read this document to suggest rules. The saved settings are on the Rules page." }
     : demo
-    ? { state: "sample", label: "Demo policy document", fileName: demoPolicyFile, detail: "This sample document is available on the Rules page. You can review the rules it suggests before saving them." }
+    ? { state: "saved", label: "Policy document", fileName: demoPolicyFile, detail: "This company's policy document is on the Rules page. ccPlannie reads it to suggest rules, which you review before saving." }
     : { state: "saved", label: "Console settings", detail: "Upload a policy document on the Rules page to suggest routing, approval, and follow-up rules." };
 
   return {
@@ -264,7 +264,7 @@ export function connections(store, { demo = false, demoPolicyFile = null } = {})
     interpretation: interpreterMode() === "model"
       ? { state: "configured", label: modelName(MODEL()), detail: "The model reads incoming emails for request details. Company rules still decide who can act and what needs approval." }
       : demo
-      ? { state: "sample", label: "Scripted email readings", detail: "The demo uses prepared readings for its story emails." }
+      ? { state: "sample", label: modelName(GEMINI_DEFAULT.split(",")[0]), detail: `ccPlannie reads email with ${modelName(GEMINI_DEFAULT.split(",")[0])}. This demo replays recorded readings of its story emails, so it plays the same way every time.` }
       : { state: "missing", label: "No model configured", detail: "Incoming emails are kept for a manager to review." },
     people,
     rules,
