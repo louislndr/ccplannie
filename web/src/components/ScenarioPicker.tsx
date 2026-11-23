@@ -12,7 +12,7 @@ export function ScenarioStart({ scenarios, current, busy, onPick, onStart }: { s
       <div className="concept-picker-content mx-auto flex max-w-6xl flex-col gap-6 py-2 sm:py-6">
         <div>
           <h2 id="choose-demo" className="text-[22px] font-semibold tracking-[-0.01em]">Choose a demo</h2>
-          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
             Choose a fictional company to follow its email story. Open the admin dashboard to see what ccPlannie records and where people make decisions.
           </p>
         </div>

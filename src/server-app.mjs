@@ -1,11 +1,13 @@
 // HTTP API + static web UI. server.mjs starts it in one of two modes; tests start it on an ephemeral port.
 //
-//   mode "demo"     The standalone email demo (fictional Acme cast, simulated venues, fixed demo clock).
-//                   Own database. No admin console, no inbound webhook. Nothing leaves the machine.
+//   mode "demo"     The fictional demos (src/scenarios/), simulated venues, a demo clock and a local outbox.
+//                   The story site and an open admin dashboard (/admin) share one database. Nothing leaves
+//                   the machine. The hosted demo (src/hosted-demo.mjs) wraps this mode with one session per browser.
 //   mode "company"  The company console for a real company: starts empty, people are added on the People
-//                   page, mail arrives through the Postmark inbound webhook and goes out through Postmark
-//                   (company directory only). Every /api/admin route needs an administrator session
-//                   (password from PLANNIE_ADMIN_PASSWORD). Demo endpoints don't exist here.
+//                   page. Mail goes through AgentMail, Gmail or Postmark when configured (src/transport.mjs),
+//                   otherwise it stays in the local outbox. Venue exchanges stay simulated. Every /api/admin
+//                   route needs an administrator session (password from PLANNIE_ADMIN_PASSWORD). Demo
+//                   endpoints don't exist here.
 //
 // A client-supplied actor is never an administrator. Admin actions are attributed to the session.
 // Manager actions name a configured person; the domain re-checks that person's live powers on execution,

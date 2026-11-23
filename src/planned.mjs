@@ -1,9 +1,9 @@
 // ccPlannie ⇄ Planned. This is where the connection to Planned plugs in. It is NOT connected: there are no
 // Planned credentials here, and Planned's connector tool names aren't public.
 //
-// How it would connect: Planned offers an MCP connector ("plan and manage events from the AI assistant your
-// team already uses … source venues, check event status and pull spend") and a Zip integration ("once a
-// request is approved, the event opens in Planned"). ccPlannie would connect the same way, authorized by the
+// How it would connect: Planned's integrations page lists MCP ("plan and manage events from the AI assistant
+// your team already uses") and a Zip integration ("Once a request is approved, the event opens in Planned").
+// Their operations and auth aren't public, so nothing below names real tools or endpoints. ccPlannie would connect the same way, authorized by the
 // company's Planned administrator, and exchange exactly these things (see the demo's "How it connects" page):
 //   → open the event once the event manager accepts the request (title, dates, headcount, nights, rooms,
 //     area, requested budget, requester, owner)

@@ -1,6 +1,6 @@
 // Turns one email into a PROPOSED interpretation. It never grants authority, picks recipients or executes anything.
 // Modes:
-//   model    Claude (claude-opus-5-5) with schema-validated structured output
+//   model    the configured model (src/llm.mjs: Gemini or Claude) with schema-validated structured output
 //   fixture  deterministic, pre-recorded interpretations for the labeled offline demo replay (keyed by X-Plannie-Fixture)
 //   auto     model when credentials exist, otherwise fixture (unknown messages → "unclear", flagged for the manager)
 import { generateJson, llmProvider } from "./llm.mjs";
