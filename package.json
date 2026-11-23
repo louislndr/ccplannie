@@ -9,7 +9,7 @@
     "start:console": "PLANNIE_MODE=company node --no-warnings server.mjs",
     "demo": "npm run build:web && npm run start:demo",
     "console": "npm run build:web && npm run start:console",
-    "build:web": "cd web && npm install && npx vite build",
+    "build:web": "npm ci --prefix web --include=dev && npm --prefix web run build",
     "dev:web": "cd web && npx vite",
     "test": "node --no-warnings --test tests/*.test.mjs",
     "replay": "node --no-warnings scripts/replay.mjs",
