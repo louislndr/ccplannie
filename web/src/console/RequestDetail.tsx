@@ -98,11 +98,16 @@ export function RequestDetail({ id, onActorChange }: { id: string; onActorChange
   const nextTone = needsAttention(sum) ? (toneFor(sum) === "block" ? "block" : "attn") : toneFor(sum);
   const m = sum.money;
   const venue = ev.commitment ? supName(d, ev.commitment.supplierId) : ev.selection ? supName(d, ev.proposals.find((p: any) => p.id === ev.selection.proposalId)?.supplierId) : null;
+  // Tiles show the current plan. When the booking differs (a change in progress), the small line says what's booked.
+  const v = ev.views || {};
+  const booked = v.committed;
+  const planAmount = v.working?.amount ?? null;
   const facts: [string, string, string?][] = [
-    ["Date", sum.date ? fmtDate(sum.date) : "Not set", ev.working?.nights ? `${ev.working.nights} night${ev.working.nights > 1 ? "s" : ""}` : undefined],
-    ["People", sum.headcount ? String(sum.headcount) : "Not set"],
+    ["Date", sum.date ? fmtDate(sum.date) : "Not set", booked && booked.date !== sum.date ? `Booked for ${fmtDate(booked.date)}` : ev.working?.nights ? `${ev.working.nights} night${ev.working.nights > 1 ? "s" : ""}` : undefined],
+    ["People", sum.headcount ? String(sum.headcount) : "Not set", booked && booked.headcount !== sum.headcount ? `Booked for ${booked.headcount}` : undefined],
     ["Venue", venue || "Not chosen", ev.commitment ? "Booked" : venue ? "Chosen, not booked" : undefined],
-    ["Amount", m.confirmed ? money(m.confirmed.amount) : m.approved ? money(m.approved.amount) : m.requested != null ? money(m.requested) : "No budget", m.confirmed ? "Booked" : m.approved ? `Approved · ${m.approved.ref}` : m.requested != null ? "Requested, not approved" : undefined],
+    ["Amount", planAmount != null ? money(planAmount) : m.confirmed ? money(m.confirmed.amount) : m.approved ? money(m.approved.amount) : m.requested != null ? money(m.requested) : "No budget",
+      booked && planAmount != null && booked.amount !== planAmount ? `Booked at ${money(booked.amount)}` : m.confirmed ? "Booked" : m.approved ? `Approved · ${m.approved.ref}` : planAmount != null ? "Quoted, not approved" : m.requested != null ? "Requested budget" : undefined],
     ["Owner", ev.owner ? d.people[ev.owner]?.name || ev.owner : ev.routedTo ? d.people[ev.routedTo]?.name || ev.routedTo : "Nobody", ev.owner ? "Event manager" : ev.routedTo ? "Not accepted yet" : "Needs routing"],
   ];
 
