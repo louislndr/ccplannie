@@ -1,67 +1,101 @@
 # ccPlannie
 
-**An email intake and coordination prototype for Planned.** CC ccPlannie on an event thread to turn the conversation into a structured request. The team keeps working from email while the event manager and finance see who needs to act, what has been approved, and what the venue has confirmed.
+> Independent prototype, built on fictional data. Not affiliated with or connected to Planned.
 
-## Why I built it for Planned
+**Let employees plan an event by email, while the event manager sees what each change costs, who has to approve
+it, and what is actually booked.**
 
-An offsite can already have a date, a headcount, a budget conversation, and a person who said “looks good” by the time an event manager sees the thread. Re-entering those details is one problem. Figuring out which decisions are current, who had authority to make them, and what the venue actually agreed to is harder.
+Event requests often start in an internal email thread. ccPlannie is copied on it, turns it into a structured
+request, asks for what's missing, and keeps apart three things a thread tends to blur:
+**the working plan**, **the terms finance approved**, and **what the venue confirmed**. Requesters keep using
+email. The event manager works from a company console, and finance approves exact terms in a separate private
+thread.
 
-I built ccPlannie to bring those requests into Planned’s workflow earlier. Planned already brings sourcing, proposal comparison, contracting, and program controls into one platform. Its integrations bring that workflow into tools teams already use. Email is another place to meet them. My goal was to see how much of an ordinary thread could become an actionable event brief, with a clear record of the decisions Planned would receive. [Planned Sourcing](https://planned.com/products/sourcing) · [Planned Integrations](https://planned.com/products/integrations) · [Planned Program](https://planned.com/products/program)
+## One change, three records
 
-## See it in action
+In the main demo, an offsite for 45 people is already booked at Maple Ridge for September 16 (CAD 53,000,
+finance cap CAD 55,000). Someone asks about September 19. The venue quotes CAD 56,500, including a CAD 3,500
+date-change fee from the contract. The sponsor replies "Looks good".
 
-Play a scenario in the mail view and use **Admin dashboard** to open the same step’s request, email, or company setting. **Steps** lets you revisit earlier moments without moving the live demo.
+![The demo mailbox at step 19 of the Acme scenario: Dana replies "Looks good — let's do it". ccPlannie answers that this is a choice, not a spending approval, that CAD 56,500 is CAD 1,500 over the approved CAD 55,000 cap, and that the booking stays on Thu, Sep 16 until finance approves and Planned confirms. A private approval email (R-2) with the exact new terms goes to Priya in finance.](docs/media/acme-date-change-email.png)
 
-| Demo | What to look for |
+*The requester's view: the "looks good" is recorded as a choice, finance is asked separately, and the
+existing booking is unchanged.*
+
+![The company console for the same request: status Approval needed, next step Waiting for Priya's approval. The plan, approval and booking table shows the working plan at Sun, Sep 19 and CAD 56,500, the approval R-1 at Thu, Sep 16 and CAD 53,000 with a CAD 55,000 cap, and the booking MR-88412 at Thu, Sep 16 and CAD 53,000.](docs/media/acme-date-change-console.png)
+
+*The event manager's view: three records, side by side, with the differences highlighted.*
+
+| Reconstructing it from the thread (hypothetical manual workflow) | With ccPlannie |
 | --- | --- |
-| **1 · Acme Robotics** | An assistant forwards an offsite request. A change from 30 to 45 guests makes the old quotes stale. Finance approves the revised quote, the manager sends it, and the venue confirms. A later date change adds a CAD 3,500 contract fee and goes through approval again while the original booking stays in place. |
-| **2 · Northwind Labs** | A CAD 168,000 quote exceeds the assigned approver’s limit. The controller takes over, and an unverified reply leaves the approval pending. In a second request, a promotion lets Sofia’s next email change the plan. In Intake review, adding Nina to the directory lets the team process her held email. |
-| **3 · Juniper Works** | In **step 2**, open **See the rule change**. The Rules flowchart shows the venue reply deadline moving from 24 to 8 hours. At **step 8**, the new deadline flags unanswered inquiries. Later, retry a failed approval email, see finance decline the first offer, and download the record for the confirmed replacement. |
+| Read back through replies to find the latest headcount and date, and whether "looks good" was a decision or an approval. | The working plan updates only when someone allowed to decide changes it; suggestions are recorded but don't apply. |
+| Check whether finance approved this price or an earlier one. | Approvals are bound to exact terms; a new price needs a new approval. |
+| Ask the venue what is actually confirmed. | The booking changes only when the supplier confirms; until then the original stays in place. |
 
-## What I built
-
-| Feature | Why it matters |
-| --- | --- |
-| **Email intake** | People can CC or forward an event brief from their normal inbox. ccPlannie ties replies to the request, captures supplied details, asks for what’s missing, and holds messages it can’t safely attach or act on for review. |
-| **Company directory and roles** | The People and Roles views show who can start a request, change a plan, approve spending, or manage a booking. Reporting lines, backups, and spending limits are visible. CSV imports and in-browser edits go through validation and review before they take effect. |
-| **Request ownership and triage** | The Requests inbox shows who owns the work, where it’s blocked, and the next action. Administrators can route or reassign requests and reprocess eligible held email. An event manager explicitly accepts ownership before acting. |
-| **Configurable rules** | The Rules flowchart shows default routing, approval thresholds, venue deadlines, and whether to request revised quotes automatically. Teams can add a pause, an FYI, or a person to copy at a specific stage. A written policy can be read into a draft for a person to review and save. |
-| **Sourcing and quote comparison** | The manager asks for quotes with the dates, headcount, and room needs. Replies surface prices, capacity, and availability. A plan change makes old offers stale. Late replies clear unanswered-inquiry warnings, and availability without a price remains visible as an unknown. |
-| **Spending approval and booking** | Finance approves a specific venue, date, headcount, price, and set of terms within its limit. An eligible approver can take over a blocked approval. Verified replies are checked against the current approval. The owning manager authorizes the booking, and the supplier confirmation establishes the commitment. |
-| **Changes to a booking** | The request shows the working plan, approved terms, and supplier commitment side by side. A manager can verify a contract clause against its excerpt. A revised quote and fresh approval can move the plan forward while the original booking stays confirmed. |
-| **History and follow-through** | Request history links decisions to their source emails. A manager can also record a decision from a call with who made it and who entered it. Activity records routing and company changes. Failed outgoing email can be retried from the request using the original message. |
-| **Planned exchanges and handoff** | The Planned view shows the brief, offers, booking request, and confirmation that cross the proposed integration boundary. The downloadable JSON record carries decisions, terms, and confirmation details. Connections shows the directory and policy sources and the status of email, interpretation, and Planned. |
-
-## How the handoff works
-
-ccPlannie reads the email and proposes what it means. The application checks those proposals against the recorded sender, company rules, and current request before changing state. Supplier-facing exchanges carry the event brief or booking terms. Internal discussions, approval codes, and spending caps stay with the company.
-
-In the proposed integration, ccPlannie passes a structured request to Planned for sourcing and sends exact, authorized terms for bookings or amendments. Planned returns offers, updated pricing, confirmations, and references. The demo implements this exchange with fictional venue data. A live integration would use Planned’s supported operations, workspace authorization, and approval rules.
-
-## Run the demo
-
-Use Node.js 24.
+## Try it
 
 ```bash
 npm ci
 npm run demo
 ```
 
-- [Demo picker](http://localhost:3000/)
-- [Admin dashboard](http://localhost:3000/admin)
-- [How it connects to Planned](http://localhost:3000/how-it-works)
+Open [localhost:3000](http://localhost:3000), start **Acme Robotics** and press **Next step** to follow the
+story. The moment above is step 19. Open **Admin dashboard** to see the console, or **Steps** to revisit
+earlier steps. No API keys needed; nothing is emailed.
 
-The three scenarios run without API keys. The demo uses recorded email interpretations, a local outbox, and simulated venues and contracts. **Replay** starts the scenario fresh.
+The two other demos answer narrower questions: **Northwind Labs** (who may decide and approve, and what happens
+above a spending limit) and **Juniper Works** (late venues, a failed email, a finance decline). The
+[demo guide](docs/demo-guide.md) has a short script for each.
 
-<details>
-<summary>Vercel deployment and company console</summary>
+## Why I chose this for Planned
 
-The [Vercel configuration](vercel.json) builds the frontend and serves the demo API from the same origin. Import the repository root, use Node.js 24.x, and connect Upstash Redis for session storage. The API accepts the integration’s `KV_REST_API_URL` and `KV_REST_API_TOKEN`, or `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`. Set `PLANNIE_INTERPRETER=fixture`. Hosted browsers get separate demo sessions, and progress expires seven days after the last change.
+Planned already brings sourcing, approvals, budget thresholds, contract checks and reporting into one platform,
+and integrates with Slack, Microsoft Teams and MCP so requests can come from the tools people already use. Its
+adoption playbook is about finding "the event spenders you didn't know you had", and one of its customer stories
+describes how, under that customer's previous platform, "smaller events were falling outside the system
+entirely."
 
-The standalone company console runs with `npm run console` at [localhost:3002/admin](http://localhost:3002/admin). It starts with a separate, empty directory and requires an administrator password. Copy [the environment template](.env.example) to `.env` to configure sign-in and optional AgentMail, Gmail, or Postmark delivery. Company mode keeps venue exchanges simulated.
+My hypothesis is that the internal email thread is another of those places, and that it's where the decisions
+are most ambiguous. So I built a front door that captures them without taking control away from the event
+manager or finance. That is my product judgment, not a claim that Planned lacks this: public pages can't show
+what Planned does privately, and I couldn't verify whether its email handling (for example around room blocks)
+already overlaps. Sources and reasoning: [product rationale](docs/product-rationale.md).
 
-</details>
+## How it works
 
-## Verification
+- **By email.** People CC or forward ccPlannie. It asks for missing details, shares venue options, and explains
+  consequences in plain replies. Only people whose role allows it can start a request or change the plan; email
+  from outside the company directory is held for review.
+- **In the console.** The event manager sees who owns each request and what's blocked, the plan / approval /
+  booking record, offers, and a history linked to source emails. Administrators manage people, roles and rules.
+- **Finance.** Approvals go to an approver whose limit covers the amount, in a private thread, and only a verified
+  reply from that approver to that approval counts.
 
-Run `npm test` to exercise the scenarios, approval and identity checks, company configuration, mail adapters, and hosted session isolation. To replay a scenario in the terminal, run `npm run replay -- acme`, `npm run replay -- northwind`, or `npm run replay -- juniper`.
+## Status
+
+| Part | Status |
+| --- | --- |
+| Request state, authority checks, exact-terms approvals, history, console, rules | Implemented; same code in the demo and company mode |
+| Email interpretation in the demos | Recorded readings (deterministic); proves the workflow for these inputs, not language understanding |
+| Model interpretation (Gemini or Claude) | Implemented, optional; not used by the scripted demos |
+| AgentMail, Gmail, Postmark delivery | Implemented and covered by mocked tests; not verified live in this repository |
+| Venues, offers, contracts, booking confirmations | Simulated (fictional data) |
+| Planned | **Not connected.** `src/planned.mjs` is the boundary; the download is a JSON export |
+
+## Develop
+
+```bash
+npm test                    # unit, scenario, console, mail-adapter, hosted-session and property tests
+npm run replay -- acme      # or northwind, juniper
+npm run console             # the company console on localhost:3002/admin (needs .env, see .env.example)
+```
+
+Node.js 22.13 or later (I use 24). Setup, hosted deployment, architecture and what a real Planned integration
+would require: [development guide](docs/development.md).
+
+## Limits and open questions
+
+- ccPlannie only knows about emails it is copied on. A decision made after someone drops it from the thread
+  never reaches the record.
+- The demo can't show whether real threads are read accurately, whether an email front door brings more events
+  into the program, or whether managers find this record useful. Those are what I'd test next.

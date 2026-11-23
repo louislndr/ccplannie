@@ -83,8 +83,7 @@ ${DANA_FIRST}` },
     from: "dana@acme.example", replyTo: "plannie-latest", subject: "Re: Fall team offsite", body: "Where are we on the offsite?" },
 ];
 
-// Console fixtures: labeled, pre-recorded interpretations used ONLY by the console walkthrough, the
-// multi-request fixture (scripts/console-fixture.mjs) and tests. Like the demo fixtures, they only PROPOSE
+// Console fixtures: labeled, pre-recorded interpretations used ONLY by the console walkthrough and tests. Like the demo fixtures, they only PROPOSE
 // intents; the domain still decides what each sender is allowed to do.
 export const CONSOLE_FIXTURES = {
   "CX-leo-45": { intents: [I("change", "Make it 45 — Ops is joining.", { fields: { headcount: 45 } })], unresolved: [] },
