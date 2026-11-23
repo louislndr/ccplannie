@@ -120,9 +120,42 @@ Open [localhost:3000](http://localhost:3000) and choose a scenario. **Next step*
 
 The standalone company console is available through `npm run console`. Configuration, deployment, and provider setup are covered in the [development guide](docs/development.md).
 
-## Built with
+## Technical overview
 
-React and TypeScript for the email experience and company console; Node.js and SQLite for request state, configuration, history, and outgoing work. Gemini and Claude are supported for interpretation, with AgentMail, Gmail, and Postmark adapters for email.
+### Stack
+
+| Layer | Tools |
+| --- | --- |
+| **Frontend** | React 19 and TypeScript, built with Vite 8. Tailwind CSS 4 and Base UI for the interface, Lucide icons, and d3-org-chart for the People chart. |
+| **Server** | Node.js 24 with its built-in HTTP server and SQLite (`node:sqlite`). No web framework and no external database for local use. |
+| **AI** | Google Gemini (default: Gemini 3.8 Flash, through a Google AI Studio API key or Vertex AI, using `@google/genai`), or Anthropic Claude (API or Vertex AI). Zod schemas validate every model answer. |
+| **Email** | [AgentMail](https://agentmail.to) gives ccPlannie its own inbox through an API: it polls for new mail, sends replies, and uses AgentMail's DKIM/DMARC results to verify senders. Gmail (IMAP and SMTP through `imapflow`, `nodemailer` and `mailparser`) and Postmark are alternatives. |
+| **Hosting** | Vercel for the site and a serverless API function; Upstash Redis keeps one demo session per visitor. |
+| **Testing** | Node's test runner, `fast-check` property tests, and `playwright-core` for screenshots. |
+
+### How the AI is used
+
+The model never acts on its own:
+
+- **Reading email.** It turns an email into *proposed* intents ("change headcount to 45", "choose option 2", "approve R-2"). Plain code then checks who sent it, what their role allows, and whether the terms match, before anything changes (`src/interpret.mjs`, `src/domain.mjs`).
+- **Reading policies.** On the Rules page, it reads an uploaded policy document into suggested settings that an admin reviews before saving (`src/policy-import.mjs`).
+
+The demo's story emails replay recorded readings, so the demo works without an API key and always plays the same way.
+
+### How the pieces connect
+
+```
+email (AgentMail / Gmail / Postmark)
+  → interpret.mjs   the model proposes what the email means
+  → domain.mjs      code checks permissions, approvals and limits; updates plan / approval / booking
+  → SQLite          request record, history, company setup, outgoing email queue
+  → console + replies in the email thread
+  ↔ planned.mjs     where Planned would connect (simulated venues today)
+```
+
+### Connecting to Planned (proposed)
+
+The company's Planned admin would authorize ccPlannie through Planned's supported integration (Planned lists MCP and Zip among its [integrations](https://planned.com/products/integrations)). ccPlannie would send Planned the event brief once a manager accepts the request, and later only the exact, finance-approved terms to book or change. Planned would send back venue options, revised prices with contract fees, and booking confirmations with references. Internal email discussion, approval codes and budget caps would stay in ccPlannie. Today this exchange is simulated (`src/planned.mjs`, `src/supplier-sim.mjs`).
 
 The application checks permissions and event state before applying interpreted decisions. Persistent records, duplicate-message handling, version checks, and delivery retries support continuity as the conversation progresses. Scenario replays and historical snapshots make the workflow repeatable and inspectable.
 
